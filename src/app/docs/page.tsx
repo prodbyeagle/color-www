@@ -39,7 +39,7 @@ export default function DocsHomepage() {
 			initial='hidden'
 			animate='show'
 			variants={{ show: { transition: { staggerChildren: 0.1 } } }}
-			className='container max-w-5xl mx-auto px-6 py-24 space-y-24'>
+			className='container max-w-5xl mx-auto px-6 py-24 space-y-22'>
 			<motion.section variants={fadeUp} className='text-center space-y-8'>
 				<h1 className='text-5xl md:text-6xl font-extrabold leading-tight'>
 					Documentation for <ImageText text='@prodbyeagle/color' />
