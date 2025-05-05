@@ -1,6 +1,7 @@
 import { JSX } from 'react';
 
 import CodeBlock from '@/components/code-snippet';
+import { Command } from '@/components/command';
 import { Code } from '@/components/ui/code';
 import { Separator } from '@/components/ui/separator';
 
@@ -17,8 +18,8 @@ export const usageDoc: { title: string; content: JSX.Element } = {
 					To get started with the color extraction library, follow
 					these simple steps. This guide will show you how to extract
 					color palettes from images in various formats such as{' '}
-					<Code>RGB</Code>, <Code>HEX</Code>, <Code>HSL</Code>,{' '}
-					<Code>OKLCH</Code>, and <Code>LAB</Code>.
+					<Code>RGB</Code>, <Code>HEX</Code>, <Code>HSL</Code> and{' '}
+					<Code>OKLCH</Code>.
 				</p>
 
 				<h3 className='text-lg font-semibold mt-6 mb-2'>
@@ -26,14 +27,14 @@ export const usageDoc: { title: string; content: JSX.Element } = {
 				</h3>
 				<p>
 					First, install the color extraction library via{' '}
-					<Code>npm</Code> or <Code>yarn</Code>.
+					<Code>bun</Code> or <Code>deno</Code>.
 				</p>
-				<ul className='list-disc pl-6 space-y-1'>
+				<ul className='list-disc pl-6 space-y-1 mt-4'>
 					<li>
-						<Code>npm install @prodbyeagle/color</Code>
+						<Command command='bunx jsr add @prodbyeagle/color' />
 					</li>
 					<li>
-						<Code>yarn add @prodbyeagle/color</Code>
+						<Command command='deno add jsr:@prodbyeagle/color' />
 					</li>
 				</ul>
 
@@ -147,8 +148,7 @@ console.log(palette); // ['lab(45.3% 12.7 32.0)', ...]`}
 						<Code>WebP</Code>
 					</li>
 					<li>
-						<Code>GIF</Code> (limited support, will only extract
-						first frame)
+						<Code>GIF</Code>
 					</li>
 				</ul>
 
