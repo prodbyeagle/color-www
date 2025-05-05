@@ -6,7 +6,7 @@
       "dependencies": {
         "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
         "@number-flow/react": "^0.5.9",
-        "@prodbyeagle/color": "^0.1.1",
+        "@prodbyeagle/color": "npm:@jsr/prodbyeagle__color",
         "@radix-ui/react-dialog": "^1.1.12",
         "@radix-ui/react-dropdown-menu": "^2.1.13",
         "@radix-ui/react-label": "^2.1.5",
@@ -271,7 +271,7 @@
 
     "@preact/signals-core": ["@preact/signals-core@1.8.0", "", {}, "sha512-OBvUsRZqNmjzCZXWLxkZfhcgT+Fk8DDcT/8vD6a1xhDemodyy87UJRJfASMuSD8FaAIeGgGm85ydXhm7lr4fyA=="],
 
-    "@prodbyeagle/color": ["@prodbyeagle/color@0.1.1", "", { "peerDependencies": { "typescript": "^5.8.3" } }, "sha512-eAd5nOJzcGDpGVDHLwd4NxQDZY4k520Q1Wb2Q8LrMU9BtcqpLWE/guyRKdvVoDjTrk2IoLtw4d4xT41IhR3UQA=="],
+    "@prodbyeagle/color": ["@jsr/prodbyeagle__color@0.4.0", "https://npm.jsr.io/~/11/@jsr/prodbyeagle__color/0.4.0.tgz", {}, "sha512-dMQ4DVxEEL6RqAoi5PwXevH5ooZ+nAkE/0ECbzHalm3h092veMkqTOSRkmcyfkVuBwD6iR7kCvXqv4NrzULYVg=="],
 
     "@radix-ui/number": ["@radix-ui/number@1.1.1", "", {}, "sha512-MkKCwxlXTgz6CFoJx3pCwn07GKp36+aZyu/u2Ln2VrA5DcdyCZkASEDBTd8x5whTQQL5CiYf4prXKLcgQdv29g=="],
 
