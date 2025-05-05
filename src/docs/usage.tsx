@@ -1,7 +1,6 @@
 import { JSX } from 'react';
 
 import CodeBlock from '@/components/code-snippet';
-import { Command } from '@/components/command';
 import { InstallationTabs } from '@/components/install-tabs';
 import { Code } from '@/components/ui/code';
 import { Separator } from '@/components/ui/separator';
