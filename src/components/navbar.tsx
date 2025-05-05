@@ -14,6 +14,8 @@ import {
 
 import { cn } from '@/lib/utils';
 
+import { ImageText } from './image-text';
+
 const navItems = [
 	{ href: '/', label: 'Home' },
 	{ href: '/extract', label: 'Demo' },
@@ -28,7 +30,7 @@ export function Navbar() {
 			<div className='container flex h-16 items-center justify-between gap-4 px-4 sm:px-6'>
 				<div className='flex items-center gap-4'>
 					<span className='text-sm font-semibold tracking-tight whitespace-nowrap'>
-						@prodbyeagle/color
+						<ImageText text='@prodbyeagle/color' />
 					</span>
 
 					<nav className='hidden md:flex gap-x-6'>
