@@ -17,9 +17,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
 
 const INSTALL_COMMANDS = {
-	npm: 'npm install @prodbyeagle/color',
-	yarn: 'yarn add @prodbyeagle/color',
-	pnpm: 'pnpm install @prodbyeagle/color',
 	bun: 'bunx jsr add @prodbyeagle/color',
 	deno: 'deno add jsr:@prodbyeagle/color',
 };
@@ -60,9 +57,6 @@ export function InstallationTabs() {
 					}
 					className='w-full'>
 					<TabsList className='grid grid-cols-5 mb-4'>
-						<TabsTrigger value='npm'>npm</TabsTrigger>
-						<TabsTrigger value='yarn'>yarn</TabsTrigger>
-						<TabsTrigger value='pnpm'>pnpm</TabsTrigger>
 						<TabsTrigger value='bun'>bun</TabsTrigger>
 						<TabsTrigger value='deno'>deno</TabsTrigger>
 					</TabsList>
