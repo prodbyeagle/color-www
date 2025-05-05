@@ -22,7 +22,7 @@ export function FormatSelector() {
 				<SelectItem value='hex'>HEX</SelectItem>
 				<SelectItem value='rgb'>RGB</SelectItem>
 				<SelectItem value='hsl'>HSL</SelectItem>
-				{/* <SelectItem value='oklch'>OKLCH (NEW)</SelectItem> */}
+				{/* <SelectItem value='oklch'>OKLCH (if you see this, that means that oklch is still buggy.)</SelectItem> */}
 			</SelectContent>
 		</Select>
 	);
