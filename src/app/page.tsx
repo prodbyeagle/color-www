@@ -50,9 +50,10 @@ export default function LandingPage() {
 					colors in RGB, HEX, and HSL.
 				</p>
 				<div className='flex flex-wrap justify-center gap-4'>
-					<Button asChild size='lg'>
+					<Button className='group' asChild size='lg'>
 						<Link href='/extract'>
-							Try it now <ArrowRight className='ml-2 size-4' />
+							Try it now{' '}
+							<ArrowRight className='ml-2 size-4 group-hover:translate-x-1 transition-all duration-150' />
 						</Link>
 					</Button>
 					<Button asChild size='lg' variant='outline'>
@@ -62,6 +63,9 @@ export default function LandingPage() {
 							rel='noopener noreferrer'>
 							View on GitHub
 						</Link>
+					</Button>
+					<Button asChild size='lg' variant='outline'>
+						<Link href='/docs'>Visit Docs</Link>
 					</Button>
 				</div>
 			</motion.section>
