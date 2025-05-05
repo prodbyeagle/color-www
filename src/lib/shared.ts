@@ -8,12 +8,8 @@ import { codeToHast } from 'shiki/bundle/web';
 export async function highlight(code: string, lang: BundledLanguage) {
 	const out = await codeToHast(code, {
 		lang,
-		themes: {
-			dark: 'vesper',
-			light: 'catppuccin-latte',
-		},
+		theme: 'vesper',
 		colorReplacements: {
-			'#eff1f5': '#00000000',
 			'#101010': '#00000000',
 		},
 	});
