@@ -52,29 +52,30 @@ export const apiDoc: { title: string; content: JSX.Element } = {
 					<ul className='list-disc pl-5 mt-2'>
 						<li>
 							<Code>RGB</Code>: Returns an array of RGB arrays —
-							`number[][]`, e.g., `[[255, 204, 0], [0, 0, 0],
-							...]`.
+							<Code>number[][]</Code>, e.g.,{' '}
+							<Code>[[255, 204, 0], [0, 0, 0], ...]</Code>.
 						</li>
 						<li>
 							<Code>HEX</Code>, <Code>HSL</Code>,{' '}
 							<Code>OKLCH</Code>, or <Code>LAB</Code>: Returns an
-							array of formatted color strings — `string[]`.
+							array of formatted color strings —{' '}
+							<Code>string[]</Code>.
 						</li>
 					</ul>
 
-					<h4 className='text-xl mt-4 font-semibold'>Example:</h4>
+					<h4 className='text-xl my-4 font-semibold'>Example:</h4>
 					<CodeBlock
 						lang='typescript'
 						code={`const file = new File([/* image data */], 'photo.jpg', { type: 'image/jpeg' });
 
-const palette = await extractColors(file, 5, 'oklch');
+const palette = await extractColors(file, 5, 'hex');
 
-console.log(palette); // ['oklch(0.82 0.15 90.0deg)', ...]`}
+console.log(palette); // ['#0F0F0F', ...]`}
 					/>
 				</section>
 
 				<section>
-					<Code className='text-2xl font-semibold'>
+					<Code className='text-xl font-semibold'>
 						getImageDataFromFile(file: Blob, maxSize: number = 512)
 					</Code>
 					<p className='text-lg mt-2'>
@@ -106,7 +107,7 @@ console.log(palette); // ['oklch(0.82 0.15 90.0deg)', ...]`}
 						pixel data of the image.
 					</p>
 
-					<h4 className='text-xl mt-4 font-semibold'>Example:</h4>
+					<h4 className='text-xl my-4 font-semibold'>Example:</h4>
 					<CodeBlock
 						lang='typescript'
 						code={`const imageData = await getImageDataFromFile(file);
