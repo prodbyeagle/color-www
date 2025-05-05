@@ -4,9 +4,12 @@ import { motion } from 'framer-motion';
 import { ArrowRight, ImageIcon, Palette } from 'lucide-react';
 import Link from 'next/link';
 
+import { ImageText } from '@/components/image-text';
 import { InstallationTabs } from '@/components/install-tabs';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+
+import { fadeUp } from '@/lib/motion';
 
 type Feature = {
 	title: string;
@@ -29,19 +32,6 @@ const FEATURES: Feature[] = [
 	},
 ];
 
-const fadeUp = {
-	hidden: { opacity: 0, y: 20 },
-	show: (i = 0) => ({
-		opacity: 1,
-		y: 0,
-		transition: {
-			delay: i * 0.1,
-			duration: 0.4,
-			ease: 'easeOut',
-		},
-	}),
-};
-
 export default function LandingPage() {
 	return (
 		<motion.main
@@ -51,8 +41,8 @@ export default function LandingPage() {
 			className='container max-w-5xl mx-auto px-6 py-24 space-y-24'>
 			<motion.section variants={fadeUp} className='text-center space-y-8'>
 				<h1 className='text-5xl md:text-6xl font-extrabold leading-tight'>
-					🦅 Extract, Format & Use{' '}
-					<span className='text-destructive'>Colors</span> From Images
+					🦅 Extract, Format & Use <ImageText text='Colors' /> From{' '}
+					<ImageText text='Images' />
 				</h1>
 				<p className='text-lg text-muted-foreground max-w-3xl mx-auto'>
 					@prodbyeagle/color is a blazing-fast, dependency-free
