@@ -2,6 +2,7 @@ import { JSX } from 'react';
 
 import CodeBlock from '@/components/code-snippet';
 import { Command } from '@/components/command';
+import { InstallationTabs } from '@/components/install-tabs';
 import { Code } from '@/components/ui/code';
 import { Separator } from '@/components/ui/separator';
 
@@ -29,14 +30,9 @@ export const usageDoc: { title: string; content: JSX.Element } = {
 					First, install the color extraction library via{' '}
 					<Code>bun</Code> or <Code>deno</Code>.
 				</p>
-				<ul className='list-disc pl-6 space-y-1 mt-4'>
-					<li>
-						<Command command='bunx jsr add @prodbyeagle/color' />
-					</li>
-					<li>
-						<Command command='deno add jsr:@prodbyeagle/color' />
-					</li>
-				</ul>
+				<div className='mt-3'>
+					<InstallationTabs />
+				</div>
 
 				<h3 className='text-lg font-semibold mt-6 mb-2'>Basic Usage</h3>
 				<p>
