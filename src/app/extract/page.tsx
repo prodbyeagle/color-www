@@ -107,6 +107,10 @@ export default function ExtractPage() {
 					Drop an image and get a clean color palette in your desired
 					format.
 				</p>
+				<p className='text-muted-foreground/60 italic text-sm'>
+					All processing is done locally in your browser. We respect
+					your privacy.
+				</p>
 			</header>
 
 			<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
