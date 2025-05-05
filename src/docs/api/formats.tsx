@@ -34,10 +34,6 @@ export const formatsDoc: { title: string; content: JSX.Element } = {
 						<Code>OKLCH</Code>: OKLCH strings, e.g.,{' '}
 						<Code>oklch(0.823 0.173 84.2deg)</Code>
 					</li>
-					<li>
-						<Code>LAB</Code>: CIE Lab strings, e.g.,{' '}
-						<Code>lab(84.2% 4.2 83.1)</Code>
-					</li>
 				</ul>
 
 				<Separator className='my-8' />
@@ -52,9 +48,8 @@ export const formatsDoc: { title: string; content: JSX.Element } = {
  * - 'hex': Hexadecimal strings
  * - 'hsl': HSL format strings
  * - 'oklch': OKLCH format strings
- * - 'lab': LAB format strings
  */
-export type ColorFormat = 'rgb' | 'hex' | 'hsl' | 'oklch' | 'lab';`}
+export type ColorFormat = 'rgb' | 'hex' | 'hsl' | 'oklch';`}
 				/>
 			</section>
 		</div>
