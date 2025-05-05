@@ -1,35 +1,35 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, Code } from 'lucide-react';
-import Link from 'next/link';
+import { Code2, GalleryHorizontal, Palette, PlayCircle } from 'lucide-react';
 
+import { FeatureCard } from '@/components/feature-card';
 import { ImageText } from '@/components/image-text';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 
-import { fadeUp } from '@/lib/motion';
-
-type DocFeature = {
-	title: string;
-	description: string;
-	icon: React.ReactNode;
-	link: string;
-};
-
-const DOC_FEATURES: DocFeature[] = [
+const DOC_FEATURES = [
 	{
-		title: 'API Reference',
-		icon: <BookOpen className='size-6 text-primary' />,
-		description: 'Access detailed API documentation for advanced usage.',
-		link: '/docs/api',
+		title: 'Usage',
+		icon: <PlayCircle className='size-6 text-primary' />,
+		description: 'How to use the library in your projects.',
+		link: '/docs/usage',
 	},
 	{
-		title: 'Installation Guide',
-		icon: <Code className='size-6 text-primary' />,
-		description:
-			'Step-by-step guide to install and get started with the library.',
-		link: '/docs/installation',
+		title: 'API: extractColors',
+		icon: <Code2 className='size-6 text-primary' />,
+		description: 'Get dominant colors from images.',
+		link: '/docs/extractColors',
+	},
+	{
+		title: 'API: getImageDataFromFile',
+		icon: <GalleryHorizontal className='size-6 text-primary' />,
+		description: 'Convert images to raw pixel data.',
+		link: '/docs/getImageData',
+	},
+	{
+		title: 'API: Supported Formats',
+		icon: <Palette className='size-6 text-primary' />,
+		description: 'Details about all supported color formats.',
+		link: '/docs/formats',
 	},
 ];
 
@@ -40,7 +40,7 @@ export default function DocsHomepage() {
 			animate='show'
 			variants={{ show: { transition: { staggerChildren: 0.1 } } }}
 			className='container max-w-5xl mx-auto px-6 py-24 space-y-22'>
-			<motion.section variants={fadeUp} className='text-center space-y-8'>
+			<motion.section className='text-center space-y-8'>
 				<h1 className='text-5xl md:text-6xl font-extrabold leading-tight'>
 					Documentation for <ImageText text='@prodbyeagle/color' />
 				</h1>
@@ -51,34 +51,14 @@ export default function DocsHomepage() {
 			</motion.section>
 
 			<section className='grid sm:grid-cols-2 gap-8'>
-				{DOC_FEATURES.map((feature, i) => (
-					<motion.div
+				{DOC_FEATURES.map((feature) => (
+					<FeatureCard
 						key={feature.title}
-						custom={i}
-						variants={fadeUp}>
-						<Card className='p-6'>
-							<div className='flex items-start gap-4'>
-								<div>{feature.icon}</div>
-								<div>
-									<h3 className='text-lg font-semibold'>
-										{feature.title}
-									</h3>
-									<p className='text-muted-foreground'>
-										{feature.description}
-									</p>
-									<Link href={feature.link}>
-										<Button
-											variant='outline'
-											size='lg'
-											className='mt-4'>
-											Go to {feature.title}
-											<ArrowRight className='ml-2 size-4' />
-										</Button>
-									</Link>
-								</div>
-							</div>
-						</Card>
-					</motion.div>
+						title={feature.title}
+						description={feature.description}
+						icon={feature.icon}
+						link={feature.link}
+					/>
 				))}
 			</section>
 		</motion.main>
