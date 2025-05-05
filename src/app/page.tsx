@@ -65,6 +65,14 @@ export default function LandingPage() {
 						</Link>
 					</Button>
 					<Button asChild size='lg' variant='outline'>
+						<Link
+							href='https://jsr.io/@prodbyeagle/color'
+							target='_blank'
+							rel='noopener noreferrer'>
+							View on JSR
+						</Link>
+					</Button>
+					<Button asChild size='lg' variant='outline'>
 						<Link href='/docs'>Visit Docs</Link>
 					</Button>
 				</div>
