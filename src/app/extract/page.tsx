@@ -3,16 +3,26 @@
 import { useColorStore } from '@/store/useColorStore';
 import NumberFlow from '@number-flow/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { CheckCircle2, Copy, Settings2, Trash2 } from 'lucide-react';
+import { CheckCircle2, Copy, Download, InfoIcon, Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
-import { ColorList } from '@/components/colorlist';
-import { Dropzone } from '@/components/dropzone';
-import { FormatSelector } from '@/components/format-selector';
+import { ColorList } from '@/app/extract/components/colorlist';
+import { Dropzone } from '@/app/extract/components/dropzone';
+import { FormatSelector } from '@/app/extract/components/format-selector';
+
 import { Button } from '@/components/ui/button';
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Slider } from '@/components/ui/slider';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
 	Tooltip,
 	TooltipContent,
@@ -23,13 +33,14 @@ import {
 export default function ExtractPage() {
 	const { result, format, setResult } = useColorStore();
 	const [maxColors, setMaxColors] = useState(10);
-	const [activeTab, setActiveTab] = useState<string>('upload');
+	const [copySuccess, setCopySuccess] = useState(false);
+	const [isProcessing, setIsProcessing] = useState(false);
 
 	useEffect(() => {
-		if (result.length > 0 && activeTab === 'upload') {
-			setActiveTab('results');
+		if (result.length > 0) {
+			setIsProcessing(false);
 		}
-	}, [result, activeTab]);
+	}, [result]);
 
 	const handleMaxColorsChange = (value: number[]) => {
 		setMaxColors(value[0]);
@@ -37,33 +48,53 @@ export default function ExtractPage() {
 
 	const handleClearResults = () => {
 		setResult([]);
-		setActiveTab('upload');
+		toast.success('Results cleared', {
+			description: 'Color palette has been reset.',
+		});
 	};
 
-	const [copySuccess, setCopySuccess] = useState(false);
-
 	const handleCopyToClipboard = () => {
-		let content = '';
+		if (result.length === 0) return;
 
-		if (format === 'hex') {
-			content = result.join('\n');
-		} else if (format === 'rgb') {
-			content = result.join('\n');
-		} else {
-			content = result.join('\n');
-		}
+		const content = result.join('\n');
 
 		navigator.clipboard
 			.writeText(content)
 			.then(() => {
 				setCopySuccess(true);
+				toast.success('Copied to clipboard', {
+					description: `${result.length} colors copied in ${format.toUpperCase()} format.`,
+				});
 				setTimeout(() => {
 					setCopySuccess(false);
 				}, 2000);
 			})
 			.catch((err) => {
 				console.error('Failed to copy: ', err);
+				toast.error('Copy failed', {
+					description:
+						'Could not copy to clipboard. Please try again.',
+				});
 			});
+	};
+
+	const downloadColorPalette = () => {
+		if (result.length === 0) return;
+
+		const content = result.join('\n');
+		const blob = new Blob([content], { type: 'text/plain' });
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = `color-palette-${format}.txt`;
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+		URL.revokeObjectURL(url);
+
+		toast.success('Palette downloaded', {
+			description: `${result.length} colors saved in ${format.toUpperCase()} format.`,
+		});
 	};
 
 	return (
@@ -78,172 +109,189 @@ export default function ExtractPage() {
 				</p>
 			</header>
 
-			<Tabs
-				value={activeTab}
-				onValueChange={setActiveTab}
-				className='w-full'>
-				<div className='flex items-center justify-between mb-4'>
-					<TabsList>
-						<TabsTrigger value='upload'>Upload</TabsTrigger>
-						<TabsTrigger
-							value='results'
-							disabled={result.length === 0}>
-							Results {result.length > 0 && `(${result.length})`}
-						</TabsTrigger>
-					</TabsList>
+			<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+				<div className='space-y-4'>
+					<Dropzone maxColors={maxColors} />
 
-					<div className='flex items-center gap-2'>
+					{isProcessing && (
+						<div className='space-y-2'>
+							<p className='text-sm text-muted-foreground text-center'>
+								Processing image...
+							</p>
+							<div className='flex justify-center'>
+								<Skeleton className='h-4 w-3/4 rounded' />
+							</div>
+						</div>
+					)}
+				</div>
+
+				<div className='space-y-6'>
+					<div className='space-y-4 p-4 border rounded-lg border-border'>
+						<div className='flex items-center justify-between'>
+							<h3 className='font-medium'>Extract Settings</h3>
+							<Dialog>
+								<DialogTrigger asChild>
+									<Button
+										variant='ghost'
+										size='icon'
+										aria-label='About Color Extraction'>
+										<InfoIcon className='size-4' />
+									</Button>
+								</DialogTrigger>
+								<DialogContent>
+									<DialogHeader>
+										<DialogTitle>
+											About Color Extraction
+										</DialogTitle>
+										<DialogDescription>
+											This tool uses k-means clustering to
+											identify the most prominent colors
+											in your image. Adjust the number of
+											colors to extract more or fewer
+											colors.
+										</DialogDescription>
+									</DialogHeader>
+
+									<div className='space-y-4'>
+										<div className='text-sm'>
+											If your result contains fewer colors
+											than selected (e.g., you selected 15
+											and received 9), it means the
+											algorithm couldn&apos;t find more
+											distinct colors - your image may not
+											have enough visual variety.
+										</div>
+
+										<div className='space-y-2'>
+											<p className='text-sm font-medium'>
+												Tips for best results:
+											</p>
+											<ul className='text-sm list-disc pl-5 space-y-1'>
+												<li>
+													Use high-quality images with
+													clear and varied colors.
+												</li>
+												<li>
+													Increase the color count for
+													more detailed palettes.
+												</li>
+												<li>
+													Try different formats
+													depending on your use case.
+												</li>
+											</ul>
+										</div>
+									</div>
+								</DialogContent>
+							</Dialog>
+						</div>
+
+						<div className='space-y-2'>
+							<Label htmlFor='colorFormat'>Color Format</Label>
+							<FormatSelector />
+						</div>
+
+						<div className='space-y-2'>
+							<div className='flex items-center justify-between'>
+								<Label
+									htmlFor='maxColors'
+									className='whitespace-nowrap'>
+									Colors to Extract:{' '}
+									<NumberFlow value={maxColors} />
+								</Label>
+							</div>
+							<Slider
+								id='maxColors'
+								value={[maxColors]}
+								min={1}
+								max={40}
+								step={1}
+								onValueChange={handleMaxColorsChange}
+								className='w-full'
+							/>
+						</div>
+					</div>
+
+					<div className='flex flex-wrap gap-2'>
 						<TooltipProvider>
 							<Tooltip>
 								<TooltipTrigger asChild>
 									<Button
 										variant='outline'
 										size='icon'
-										onClick={() => setActiveTab('settings')}
-										aria-label='Settings'>
-										<Settings2 className='size-4' />
+										onClick={handleCopyToClipboard}
+										disabled={
+											copySuccess || result.length === 0
+										}
+										aria-label='Copy palette to clipboard'>
+										{copySuccess ? (
+											<CheckCircle2 className='size-4 text-green-500' />
+										) : (
+											<Copy className='size-4' />
+										)}
 									</Button>
 								</TooltipTrigger>
-								<TooltipContent>Settings</TooltipContent>
+								<TooltipContent>
+									{copySuccess
+										? 'Copied!'
+										: 'Copy all colors to clipboard'}
+								</TooltipContent>
 							</Tooltip>
 						</TooltipProvider>
 
-						{result.length > 0 && (
-							<>
-								<TooltipProvider>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button
-												variant='outline'
-												size='icon'
-												onClick={handleCopyToClipboard}
-												aria-label='Copy palette to clipboard'
-												disabled={copySuccess}>
-												{copySuccess ? (
-													<CheckCircle2 className='size-4 text-green-500' />
-												) : (
-													<Copy className='size-4' />
-												)}
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent>
-											{copySuccess
-												? 'Copied!'
-												: 'Copy all colors to clipboard'}
-										</TooltipContent>
-									</Tooltip>
-								</TooltipProvider>
-
-								<TooltipProvider>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button
-												variant='outline'
-												size='icon'
-												onClick={handleClearResults}
-												aria-label='Clear results'>
-												<Trash2 className='size-4' />
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent>
-											Clear results
-										</TooltipContent>
-									</Tooltip>
-								</TooltipProvider>
-							</>
-						)}
-					</div>
-				</div>
-
-				<TabsContent value='upload' className='mt-0'>
-					<AnimatePresence>
-						<motion.div
-							initial={{ opacity: 0, y: 10 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0 }}
-							transition={{ duration: 0.2 }}
-							className='space-y-6'>
-							<section>
-								<Dropzone maxColors={maxColors} />
-							</section>
-						</motion.div>
-					</AnimatePresence>
-				</TabsContent>
-
-				<TabsContent value='results' className='mt-0'>
-					<AnimatePresence>
-						<motion.div
-							initial={{ opacity: 0, y: 10 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0 }}
-							transition={{ duration: 0.2 }}
-							className='space-y-4'>
-							{result.length > 0 && (
-								<ColorList colors={result} format={format} />
-							)}
-						</motion.div>
-					</AnimatePresence>
-				</TabsContent>
-
-				<TabsContent value='settings' className='mt-0'>
-					<AnimatePresence>
-						<motion.div
-							initial={{ opacity: 0, y: 10 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0 }}
-							transition={{ duration: 0.2 }}
-							className='space-y-6'>
-							<div className='space-y-4 bg-card p-4 rounded-lg border'>
-								<h2 className='text-lg font-medium'>
-									Settings
-								</h2>
-
-								<div className='space-y-2'>
-									<Label htmlFor='colorFormat'>
-										Color Format
-									</Label>
-									<FormatSelector />
-								</div>
-
-								<div className='space-y-2'>
-									<div className='flex items-center justify-between'>
-										<Label
-											htmlFor='maxColors'
-											className='whitespace-nowrap'>
-											Colors to Extract:{' '}
-											<NumberFlow value={maxColors} />
-										</Label>
-									</div>
-									<Slider
-										id='settingsMaxColors'
-										value={[maxColors]}
-										min={1}
-										max={30}
-										step={1}
-										onValueChange={handleMaxColorsChange}
-										className='w-full'
-									/>
-								</div>
-
-								<div className='pt-2'>
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
 									<Button
 										variant='outline'
-										size='sm'
-										onClick={() =>
-											setActiveTab(
-												result.length > 0
-													? 'results'
-													: 'upload'
-											)
-										}>
-										Done
+										size='icon'
+										onClick={downloadColorPalette}
+										disabled={result.length === 0}
+										aria-label='Download palette'>
+										<Download className='size-4' />
 									</Button>
-								</div>
-							</div>
-						</motion.div>
-					</AnimatePresence>
-				</TabsContent>
-			</Tabs>
+								</TooltipTrigger>
+								<TooltipContent>
+									Download palette as text file
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
+
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<Button
+										variant='outline'
+										size='icon'
+										onClick={handleClearResults}
+										disabled={result.length === 0}
+										aria-label='Clear results'>
+										<Trash2 className='size-4' />
+									</Button>
+								</TooltipTrigger>
+								<TooltipContent>Clear results</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
+					</div>
+				</div>
+			</div>
+
+			{/* Results section */}
+			{result.length > 0 && (
+				<AnimatePresence>
+					<motion.div
+						initial={{ opacity: 0, y: 10 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.2 }}
+						className='space-y-4 mt-8'>
+						<h2 className='text-xl font-medium'>
+							Color Palette ({result.length})
+						</h2>
+						<ColorList colors={result} format={format} />
+					</motion.div>
+				</AnimatePresence>
+			)}
 		</main>
 	);
 }
