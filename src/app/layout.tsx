@@ -7,6 +7,7 @@ import { Geist_Mono, Inter } from 'next/font/google';
 import { DottedBackground } from '@/components/eagle/dotted';
 import { ReactScan } from '@/components/eagle/react-scan';
 import { Toaster } from '@/components/eagle/toast';
+import Footer from '@/components/footer';
 import { Navbar } from '@/components/navbar';
 
 const geistSans = Inter({
@@ -97,6 +98,7 @@ export default function RootLayout({
 						/>
 					</div>
 					<Toaster />
+					<Footer />
 				</ThemeProvider>
 				<ReactScan />
 			</body>
