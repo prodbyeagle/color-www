@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, BookOpen, Code } from 'lucide-react';
 import Link from 'next/link';
 
+import { ImageText } from '@/components/image-text';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
@@ -41,8 +42,7 @@ export default function DocsHomepage() {
 			className='container max-w-5xl mx-auto px-6 py-24 space-y-24'>
 			<motion.section variants={fadeUp} className='text-center space-y-8'>
 				<h1 className='text-5xl md:text-6xl font-extrabold leading-tight'>
-					Documentation for{' '}
-					<span className='text-destructive'>@prodbyeagle/color</span>
+					Documentation for <ImageText text='@prodbyeagle/color' />
 				</h1>
 				<p className='text-lg text-muted-foreground max-w-3xl mx-auto'>
 					Explore the full documentation to get the most out of this
