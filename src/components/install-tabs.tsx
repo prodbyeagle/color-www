@@ -56,9 +56,9 @@ export function InstallationTabs() {
 						setSelectedTab(value as PackageManager)
 					}
 					className='w-full'>
-					<TabsList className='grid grid-cols-5 mb-4'>
+					<TabsList className='grid grid-cols-2 mb-4 w-full'>
 						<TabsTrigger value='bun'>bun</TabsTrigger>
-						<TabsTrigger value='deno'>deno</TabsTrigger>
+						<TabsTrigger value='deno'>deno ( NEW 🎇 )</TabsTrigger>
 					</TabsList>
 
 					{Object.keys(INSTALL_COMMANDS).map((manager) => (
