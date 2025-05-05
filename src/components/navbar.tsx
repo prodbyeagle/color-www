@@ -17,6 +17,7 @@ import { cn } from '@/lib/utils';
 const navItems = [
 	{ href: '/', label: 'Home' },
 	{ href: '/extract', label: 'Demo' },
+	{ href: '/docs', label: 'Docs' },
 ];
 
 export function Navbar() {
