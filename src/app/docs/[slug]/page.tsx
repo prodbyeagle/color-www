@@ -1,6 +1,8 @@
 'use client';
 
-import { apiDoc } from '@/docs/api';
+import { extractColorsDoc } from '@/docs/api/extractColors';
+import { formatsDoc } from '@/docs/api/formats';
+import { getImageDataDoc } from '@/docs/api/getImageData';
 import { usageDoc } from '@/docs/usage';
 import { Loader2 } from 'lucide-react';
 import { notFound, useParams, useRouter } from 'next/navigation';
@@ -10,13 +12,17 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
 type Docs = {
-	api: { title: string; content: JSX.Element };
 	usage: { title: string; content: JSX.Element };
+	extractColors: { title: string; content: JSX.Element };
+	getImageData: { title: string; content: JSX.Element };
+	formats: { title: string; content: JSX.Element };
 };
 
 const docs: Docs = {
-	api: apiDoc,
 	usage: usageDoc,
+	formats: formatsDoc,
+	extractColors: extractColorsDoc,
+	getImageData: getImageDataDoc,
 };
 
 export default function DocsSlug() {
