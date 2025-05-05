@@ -147,7 +147,8 @@ console.log(palette); // ['lab(45.3% 12.7 32.0)', ...]`}
 						<Code>WebP</Code>
 					</li>
 					<li>
-						<Code>GIF</Code> (limited support, will only extract first frame)
+						<Code>GIF</Code> (limited support, will only extract
+						first frame)
 					</li>
 				</ul>
 

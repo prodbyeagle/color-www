@@ -46,7 +46,8 @@ export const getImageDataDoc: { title: string; content: JSX.Element } = {
 				<h3 className='text-lg font-semibold mt-6 mb-2'>Throws</h3>
 				<p className='mb-4'>
 					Throws an error if the 2D rendering context could not be
-					initialized (e.g. browser doesn&apos;t support OffscreenCanvas).
+					initialized (e.g. browser doesn&apos;t support
+					OffscreenCanvas).
 				</p>
 
 				<Separator className='my-8' />

@@ -17,8 +17,9 @@ export const extractColorsDoc: { title: string; content: JSX.Element } = {
 				<p className='mb-4'>
 					Extracts a color palette from an image file or blob,
 					returning the most dominant colors in a specified format.
-					Supports: <Code>&apos;rgb&apos;</Code>, <Code>&apos;hex&apos;</Code>,{' '}
-					<Code>&apos;hsl&apos;</Code>, <Code>&apos;oklch&apos;</Code>, and{' '}
+					Supports: <Code>&apos;rgb&apos;</Code>,{' '}
+					<Code>&apos;hex&apos;</Code>, <Code>&apos;hsl&apos;</Code>,{' '}
+					<Code>&apos;oklch&apos;</Code>, and{' '}
 					<Code>&apos;lab&apos;</Code>.
 				</p>
 
@@ -36,8 +37,10 @@ export const extractColorsDoc: { title: string; content: JSX.Element } = {
 					<li>
 						<Code>format</Code> – Optional format of the resulting
 						colors (default: <Code>&apos;hex&apos;</Code>). One of:{' '}
-						<Code>&apos;rgb&apos;</Code>, <Code>&apos;hex&apos;</Code>,{' '}
-						<Code>&apos;hsl&apos;</Code>, <Code>&apos;oklch&apos;</Code>,{' '}
+						<Code>&apos;rgb&apos;</Code>,{' '}
+						<Code>&apos;hex&apos;</Code>,{' '}
+						<Code>&apos;hsl&apos;</Code>,{' '}
+						<Code>&apos;oklch&apos;</Code>,{' '}
 						<Code>&apos;lab&apos;</Code>.
 					</li>
 				</ul>
@@ -48,13 +51,15 @@ export const extractColorsDoc: { title: string; content: JSX.Element } = {
 				</p>
 				<ul className='list-disc pl-6 space-y-1'>
 					<li>
-						<Code>&apos;rgb&apos;</Code>: <Code>number[][]</Code> — e.g.,{' '}
-						<Code>[[255, 204, 0], [0, 0, 0], ...]</Code>
+						<Code>&apos;rgb&apos;</Code>: <Code>number[][]</Code> —
+						e.g., <Code>[[255, 204, 0], [0, 0, 0], ...]</Code>
 					</li>
 					<li>
-						<Code>&apos;hex&apos;</Code>, <Code>&apos;hsl&apos;</Code>,{' '}
-						<Code>&apos;oklch&apos;</Code>, <Code>&apos;lab&apos;</Code>:{' '}
-						<Code>string[]</Code> — e.g., <Code>[&apos;#ffcc00&apos;]</Code>
+						<Code>&apos;hex&apos;</Code>,{' '}
+						<Code>&apos;hsl&apos;</Code>,{' '}
+						<Code>&apos;oklch&apos;</Code>,{' '}
+						<Code>&apos;lab&apos;</Code>: <Code>string[]</Code> —
+						e.g., <Code>[&apos;#ffcc00&apos;]</Code>
 					</li>
 				</ul>
 
