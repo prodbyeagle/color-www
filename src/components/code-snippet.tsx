@@ -21,6 +21,7 @@ export default function CodeBlock({
 	);
 
 	useEffect(() => {
+		// @ts-expect-error shiki is not a module
 		return void highlight(code, lang).then(setHighlightedCode);
 	}, [code, lang]);
 
