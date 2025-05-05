@@ -2,14 +2,14 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist_Mono, Inter } from 'next/font/google';
 
 import { DottedBackground } from '@/components/eagle/dotted';
 import { ReactScan } from '@/components/eagle/react-scan';
 import { Toaster } from '@/components/eagle/toast';
 import { Navbar } from '@/components/navbar';
 
-const geistSans = Geist({
+const geistSans = Inter({
 	variable: '--font-geist-sans',
 	subsets: ['latin'],
 });
@@ -78,12 +78,12 @@ export default function RootLayout({
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground select-none`}>
+				className={`${geistSans.variable} ${geistMono.variable} tracking-tight font-sans antialiased bg-background text-foreground select-none`}>
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='system'
 					enableSystem>
-					<div className='relative flex flex-col'>
+					<div className='relative flex flex-col min-h-screen'>
 						<Navbar />
 
 						<main className='flex-1 flex items-start justify-center pt-10'>
