@@ -13,6 +13,7 @@ export const usageDoc: { title: string; content: JSX.Element } = {
 
 			<div className='mt-4'>
 				<CodeBlock
+					lang='ts'
 					code={`import { extractColor } from '@prodbyeagle/color';\n\nconst colors = extractColor(imageData);`}
 				/>
 			</div>
