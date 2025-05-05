@@ -78,15 +78,15 @@ export default function RootLayout({
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground min-h-screen`}>
+				className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}>
 				<ThemeProvider
 					attribute='class'
 					defaultTheme='system'
 					enableSystem>
-					<div className='relative flex flex-col min-h-screen'>
+					<div className='relative flex flex-col'>
 						<Navbar />
 
-						<main className='flex-1 flex items-start justify-center px-4 pb-20 pt-10'>
+						<main className='flex-1 flex items-start justify-center pt-10'>
 							{children}
 						</main>
 
