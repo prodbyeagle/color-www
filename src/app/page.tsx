@@ -22,7 +22,7 @@ const FEATURES: Feature[] = [
 		title: 'Multi-format Output',
 		icon: <Palette className='size-6 text-primary' />,
 		description:
-			'Extract colors in rgb, hex, or hsl – perfect for design tools, UIs, and theming systems.',
+			'Extract colors in rgb, hex, hsl or oklch – perfect for design tools, UIs, and theming systems.',
 	},
 	{
 		title: 'File & Blob Support',
@@ -47,7 +47,7 @@ export default function LandingPage() {
 				<p className='text-lg text-muted-foreground max-w-3xl mx-auto'>
 					@prodbyeagle/color is a blazing-fast, dependency-free
 					TypeScript library to analyze and format dominant image
-					colors in RGB, HEX, and HSL.
+					colors in RGB, HEX, HSL and OKLCH.
 				</p>
 				<div className='flex flex-wrap justify-center gap-4'>
 					<Button className='group' asChild size='lg'>
