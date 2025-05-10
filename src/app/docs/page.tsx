@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Code2, GalleryHorizontal, Palette, PlayCircle } from 'lucide-react';
 
+import { WordReveal } from '@/components/eagle/word-reveal';
 import { FeatureCard } from '@/components/feature-card';
 import { ImageText } from '@/components/image-text';
 
@@ -42,7 +43,10 @@ export default function DocsHomepage() {
 			className='container max-w-5xl mx-auto px-6 py-24 space-y-22'>
 			<motion.section className='text-center space-y-8'>
 				<h1 className='text-5xl md:text-6xl font-extrabold leading-tight'>
-					Documentation for <ImageText text='@prodbyeagle/color' />
+					<WordReveal>
+						Documentation for{' '}
+						<ImageText text='@prodbyeagle/color' />
+					</WordReveal>
 				</h1>
 				<p className='text-lg text-muted-foreground max-w-3xl mx-auto'>
 					Explore the full documentation to get the most out of this
