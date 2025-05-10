@@ -41,7 +41,7 @@ export function Dropzone({ maxColors }: DropzoneProps) {
 	return (
 		<div
 			{...getRootProps()}
-			className='border-dashed border-2 rounded-md p-6 text-center cursor-pointer'>
+			className='border-dashed border-2 h-48 rounded-md p-6 text-center cursor-pointer flex items-center justify-center'>
 			<input {...getInputProps()} />
 			<p className='text-muted-foreground'>
 				Drop image here or click to upload
