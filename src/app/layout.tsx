@@ -2,7 +2,7 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
-import { Geist_Mono, Inter } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 
 import { DottedBackground } from '@/components/eagle/dotted';
 import { ReactScan } from '@/components/eagle/react-scan';
@@ -10,7 +10,7 @@ import { Toaster } from '@/components/eagle/toast';
 import Footer from '@/components/footer';
 import { Navbar } from '@/components/navbar';
 
-const geistSans = Inter({
+const geistSans = Geist({
 	variable: '--font-geist-sans',
 	subsets: ['latin'],
 });
